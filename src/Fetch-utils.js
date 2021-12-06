@@ -4,7 +4,7 @@ const URL = 'http://localhost:7890';
 
 export async function postFormData(obj) {
     await request
-    .post(`${URL}/formdata/data`)
+    .post(`${URL}/formdata`)
     .send(obj);
 
 } 

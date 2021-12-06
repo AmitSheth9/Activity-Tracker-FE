@@ -1,0 +1,13 @@
+label {
+    font-size: 25px;
+}
+input {
+    font-size: 15px;
+}
+.title {
+    font-size: 30px;
+    color: blue;
+}
+body {
+    background: turquoise;
+}

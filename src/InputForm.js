@@ -1,60 +1,102 @@
 import React, { Component } from 'react'
 //import { postStatesDifferential } from './fetch-utils';
 import { postFormData } from './Fetch-utils';
+import {actArr} from './activity-array';
+import './InputForm.css';
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
 
-
-export default class PopulationChange extends Component {
-    
-    state = {
-        name: '',
-        duration: '',
-        time: '',
+export default class InputForm extends Component {
+   
+        state = {
+        name: 'meditation',
+        duration: 0,
         notes: '',
-        date: '',
-        user: 'amit'
+        date: new Date().toLocaleString(),
+        id: 1,
+        user: 'amit',
+        act_datetime:'',
     }
-    
+
     componentDidMount = async () => {
-        this.setState ({ date: this.getDate()});
+        this.getDate();     
     }
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         this.getDate();
-        let obj = {
+        const obj = {
             name: this.state.name,
             duration: this.state.duration,
-            time: this.state.time,
+            time: this.state.datep,
             notes: this.state.notes,
             date: this.state.date,
-            user: this.state.user }
-            console.log('submit');
-        console.log(obj);
-        postFormData(obj);
+            user: this.state.user, 
+            id: this.state.id }
+        
+        console.log('submit-obj', obj);
+        await postFormData(obj);
+        alert('Activity Succesfully Sent!');
+        this.setState({ notes: ''});
     }
     getDate = () => {
         let currentDate = new Date().toLocaleString();
-        console.log('date' + currentDate);
         this.setState({ date: currentDate});
     }
+    handleOption = (e, value) =>{
+        this.setState({ name: e.target.value})
+        
+    }
+    onChangeActivity = (e) => {
+        this.setState({ id: e.target.value });
+        this.setState({ name: actArr[e.target.value - 1].activity});
+    }
+
+    handleDate(date){
+        this.setState({datetime: date._d});  
+     };
+
+     changeDate = (event) => {
+        /*console.log(event.toDate()) // Tue Nov 24 2020 00:00:00 GMT+0400 (Gulf Standard Time)
+        console.log(event.format("DD-MM-YYYY hh:mm")) //24-11-2020* format("DD-MM-YYYY hh:mm")*/
+        this.setState({...this.state, datep: event.toDate()}) 
+       // this.setState({datep: event.format("DD-MM-YYYY hh:mm")})
+   }
+   
     render() {
         console.log('render');
-        console.log(this.state);
+        console.log('inside render', this.state);
         return (
-            <div> 
+            <div className='title'> ACTIVITY TRACKER!
                 <form onSubmit={this.handleSubmit}>
+                    
                     <label>Enter Activity Name:
-                    <input type='text' onChange={ e => this.setState({ name: e.target.value })} />
+                        <select value={this.state.id} onChange={this.onChangeActivity}>
+                        {actArr.map((act => {
+                            return  <option key={act.activity} value={(Number(actArr.indexOf(act))+1)}>{act.activity} </option>
+                            }))}
+                           
+                        </select>
                     </label>
                     <br/>
-                    <label>Activity Duration:
-                        <input type='text' onChange={ e => this.setState({ duration: e.target.value })}/>
+                    
+                    <label>Duration (minutes):
+                        <input type='number' onChange={ e => this.setState({ duration: e.target.value })}/>
                     </label><br/>
+                    
                     <label>Activity Time:
-                        <input type='text' onChange={ e => this.setState({ time: e.target.value })}/>
+                        <Datetime
+                            id="datepicker"
+                            dateFormat="DD-MM-YY hh:mm"
+                            value={this.state.datep}
+                            onChange={this.changeDate}
+   
+                       />
                     </label><br/>
+                    
                     <label>Notes:
                         <input type='text' onChange={ e => this.setState({ notes: e.target.value })}/>
                     </label>
+                    
                     <button>Submit</button>
                 </form>
             
