@@ -33,7 +33,8 @@ const actArr = [
       activity: 'work on this app'
     },
   ];
-  const timeArr = [
+  // eslint-disable-next-line no-lone-blocks
+  {/*const timeArr = [
       {time: 100},
       {time: 200},
       {time: 300},
@@ -59,6 +60,7 @@ const actArr = [
       {time: 2300},
       {time: 2400},
   ]
+*/}
  /*function handleName(){
         this.state.id === '1' ? this.setState({ name: 'meditation'}) : this.setState({ user: 'amit'});
         this.state.id === '2' ? this.setState({ name: 'exercise'}) : this.setState({ user: 'amit'});
