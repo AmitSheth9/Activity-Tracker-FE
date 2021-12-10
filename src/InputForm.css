@@ -3,6 +3,7 @@ label {
 }
 input {
     font-size: 15px;
+   
 }
 .title {
     font-size: 30px;
@@ -10,4 +11,12 @@ input {
 }
 body {
     background: turquoise;
+}
+.act-time {
+    display: inline-block;
+
+}
+.act-datetime {
+    display: inline-block;
+    
 }

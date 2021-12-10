@@ -67,6 +67,8 @@ export default class InputForm extends Component {
         console.log('inside render', this.state);
         return (
             <div className='title'> ACTIVITY TRACKER!
+            <fieldset>
+                <legend>Add Activity</legend>
                 <form onSubmit={this.handleSubmit}>
                     
                     <label>Enter Activity Name:
@@ -83,9 +85,10 @@ export default class InputForm extends Component {
                         <input type='number' onChange={ e => this.setState({ duration: e.target.value })}/>
                     </label><br/>
                     
-                    <label>Activity Time:
-                        <Datetime
+                    <label className='act-time-label'>Activity Time:
+                        <Datetime 
                             id="datepicker"
+                            className='act-datetime'
                             dateFormat="DD-MM-YY hh:mm"
                             value={this.state.datep}
                             onChange={this.changeDate}
@@ -99,6 +102,7 @@ export default class InputForm extends Component {
                     
                     <button>Submit</button>
                 </form>
+                </fieldset>
             
         
             </div>
