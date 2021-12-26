@@ -16,6 +16,8 @@ export default class InputForm extends Component {
         id: 1,
         user: 'amit',
         act_datetime:'',
+
+        //change act_datetime to datep..its working without it but confusing if you forget
     }
 
     componentDidMount = async () => {

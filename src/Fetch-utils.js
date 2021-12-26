@@ -1,5 +1,5 @@
 import request from 'superagent';
-const URL = 'http://localhost:7890';
+const URL = 'https://activity-tracker99.herokuapp.com';
 
 
 export async function postFormData(obj) {
